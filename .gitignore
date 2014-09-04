@@ -1,0 +1,10 @@
+# Temporary files
+*~
+*#*
+
+# Lib files
+node_modules/
+
+# Build artifacts
+docs/
+lib/
