@@ -37,7 +37,7 @@ global.buffer = buffer
 global.logger.writer = buffer.write
 
 preProcessExpectation = (expectation) ->
-  expectation.replace /#/gm, ''          # remove all '#' symbols
+  expectation.replace /#/gm, ''                 # remove all '#' symbols
 
 processExpectation = (expectation) ->
   processed = expectation
