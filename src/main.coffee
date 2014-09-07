@@ -1,15 +1,37 @@
+logger = require './logger'
+{color} = require './util'
+
 module.exports = (runner) ->
-  passes = 0
-  failures = 0
+  stats =
+    passes: 0
+    failures: 0
+
+  errors = []
+
+  runner.on 'start', ->
+    stats.start = new Date
+
+  runner.on 'suite', (suite) ->
+    logger.log suite.title
+    do logger.indent
+
+  runner.on 'suite end', ->
+    do logger.unindent
+    logger.log '' if logger.indentation is 0
 
   runner.on 'pass', (test) ->
-    passes++
-    console.log "pass: #{do test.fullTitle}"
+    stats.passes++
+    logger.pass test.title
 
   runner.on 'fail', (test, err) ->
-    failures++
-    console.log "fail: #{do test.fullTitle}, message: #{err.message}"
+    stats.failures++
+    logger.fail "#{test.title} (#{stats.failures})"
+    errors.push err
 
   runner.on 'end', ->
-    console.log "end: #{passes}/#{passes + failures}"
-    process.exit failures
+    logger.showError err, (index + 1) for err, index in errors
+    duration = new Date - stats.start
+    logger.log color 'pass', "#{stats.passes} passing (#{duration}ms)"
+    logger.log color 'fail', "#{stats.failures} failing"
+    stats.passes = stats.failures = 0
+    errors = []

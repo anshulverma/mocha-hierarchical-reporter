@@ -38,7 +38,7 @@ module.exports = (grunt) ->
           ]
       test:
         options:
-          reporter: 'spec'
+          reporter: "spec"
           colors: true
         src: [ '<%= path.test %>/*.coffee' ]
       coverageHTML:
@@ -60,6 +60,8 @@ module.exports = (grunt) ->
       test:
         files:
           src: [ '<%= path.test %>/*.coffee' ]
+        options:
+          configFile: 'test/coffeelint.json'
       buildTools:
         files:
           src: [ 'Gruntfile.coffee' ]
