@@ -13,6 +13,8 @@ mocha-hierarchical-reporter
 
 - [mocha-hierarchical-reporter](#mocha-hierarchical-reporter)
     - [Summary](#summary)
+    - [Installation](#installation)
+    - [Usage](#usage)
     - [Building](#building)
     - [Testing](#testing)
     - [Documentation](#documentation)
@@ -26,7 +28,36 @@ mocha-hierarchical-reporter
 ## Summary
 
 Reporter for mocha tests which prints the test statuses in a
-hierarchical manner.
+hierarchical manner. This reporter is based on the `spec` reporter
+provided by mocha. There are a few differences between this and `spec`:
+
+- A failing test has a `x` in front of it. The failing index suffix has
+  been moved to the end of line.
+
+![Example report of failing tests](https://raw.githubusercontent.com/anshulverma/mocha-hierarchical-reporter/development/images/failing-tests.png "Report of failing tests")
+
+- The failures are reported in the end as in `spec`. The only difference
+  is the name of the failed tests is shown in a hierarchy.
+
+![Example report of failed test](https://raw.githubusercontent.com/anshulverma/mocha-hierarchical-reporter/development/images/failed-test.png "Trace of a failed test")
+
+- Object diff is reported properly with a deep colored diff of its
+  contents.
+
+![Example of object diff](https://raw.githubusercontent.com/anshulverma/mocha-hierarchical-reporter/development/images/object-diff.png "Object diff")
+
+## Installation
+
+Install using `npm` and save it as a development dependency:
+
+> npm install hierarchical-reporter --save-dev
+
+## Usage
+
+Simply use the `--reporter` CLI option to specify the reporter you want
+to use:
+
+> mocha --reporter hierarchical-reporter test/*.js
 
 ## Building
 
