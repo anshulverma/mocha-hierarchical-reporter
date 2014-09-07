@@ -41,9 +41,10 @@ preProcessExpectation = (expectation) ->
 
 processExpectation = (expectation) ->
   processed = expectation
-    .slice 1, expectation.length          # remove the starting line
-    .replace /([\(\)\[\]\.\*])/g, '\\$1'  # escape regex symbols
-    .replace /NNN/g, '[0-9]*'             # NNN -> any number
+    .slice 1, expectation.length                # remove the starting line
+    .replace /([\(\)\[\]\.\*])/g, '\\$1'        # escape regex symbols
+    .replace /NNN/g, '[0-9]*'                   # any number regex
+    .replace /STACKTRACE\n/gm, '(    at .*\n)+' # Stacktrace regex
   "^#{processed}$"
 
 global.match = (actual, expected) ->

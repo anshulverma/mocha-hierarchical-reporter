@@ -5,16 +5,7 @@ expectation =
      * test1 (1)
   #
   1) Error: forced to fail
-    at Context.<anonymous> (/Users/ansverma/Workspace/mocha-hierarchical-reporter/test/no_passing_test.coffee:NNN:39)
-    at callFn (/Users/ansverma/Workspace/mocha-hierarchical-reporter/node_modules/grunt-mocha-test/node_modules/mocha/lib/runnable.js:223:21)
-    at Test.Runnable.run (/Users/ansverma/Workspace/mocha-hierarchical-reporter/node_modules/grunt-mocha-test/node_modules/mocha/lib/runnable.js:216:7)
-    at Runner.runTest (/Users/ansverma/Workspace/mocha-hierarchical-reporter/node_modules/grunt-mocha-test/node_modules/mocha/lib/runner.js:373:10)
-    at /Users/ansverma/Workspace/mocha-hierarchical-reporter/node_modules/grunt-mocha-test/node_modules/mocha/lib/runner.js:451:12
-    at next (/Users/ansverma/Workspace/mocha-hierarchical-reporter/node_modules/grunt-mocha-test/node_modules/mocha/lib/runner.js:298:14)
-    at /Users/ansverma/Workspace/mocha-hierarchical-reporter/node_modules/grunt-mocha-test/node_modules/mocha/lib/runner.js:308:7
-    at next (/Users/ansverma/Workspace/mocha-hierarchical-reporter/node_modules/grunt-mocha-test/node_modules/mocha/lib/runner.js:246:23)
-    at Object._onImmediate (/Users/ansverma/Workspace/mocha-hierarchical-reporter/node_modules/grunt-mocha-test/node_modules/mocha/lib/runner.js:275:5)
-    at processImmediate [as _immediateCallback] (timers.js:330:15)
+STACKTRACE
   #
   0 passing (NNNms)
   1 failing

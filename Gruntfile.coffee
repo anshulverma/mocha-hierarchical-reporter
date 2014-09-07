@@ -60,8 +60,6 @@ module.exports = (grunt) ->
       test:
         files:
           src: [ '<%= path.test %>/*.coffee' ]
-        options:
-          configFile: 'test/coffeelint.json'
       buildTools:
         files:
           src: [ 'Gruntfile.coffee' ]
