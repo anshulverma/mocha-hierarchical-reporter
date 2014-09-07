@@ -38,7 +38,7 @@ module.exports = (grunt) ->
           ]
       test:
         options:
-          reporter: "spec"
+          reporter: 'spec'
           colors: true
         src: [ '<%= path.test %>/*.coffee' ]
       coverageHTML:
