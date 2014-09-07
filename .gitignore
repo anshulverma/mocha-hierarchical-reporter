@@ -12,3 +12,6 @@ coverage/
 
 # Sourcemap
 *.map
+
+# Log files
+*.log
