@@ -39,7 +39,7 @@ provided by mocha. There are a few differences between this and `spec`:
 - The failures are reported in the end as in `spec`. The only difference
   is the name of the failed tests is shown in a hierarchy.
 
-![Example report of failed test](https://raw.githubusercontent.com/anshulverma/mocha-hierarchical-reporter/master/images/failed-test.png "Trace of a failed test")
+![Example report of failed test](https://raw.githubusercontent.com/anshulverma/mocha-hierarchical-reporter/master/images/failed-tests.png "Trace of a failed test")
 
 - Object diff is reported properly with a deep colored diff of its
   contents.
