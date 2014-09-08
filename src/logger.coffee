@@ -1,4 +1,5 @@
-{color, colors, symbols} = require './util'
+lifo = require 'lifo'
+{color, colors, symbols, processError, getSpacing} = require './util'
 
 class Logger
   constructor: ->
@@ -6,7 +7,7 @@ class Logger
     @writer = console.log
 
   print: (str) ->
-    @writer "  #{Array(@indentation * 4).join ' '}#{str}"
+    @writer "  #{getSpacing @indentation, 4}#{str}"
 
   log: (str) ->
     @print str
@@ -21,15 +22,26 @@ class Logger
     @indentation++
 
   unindent: ->
-    @indentation--
+    @indentation-- if @indentation > 0
 
-  showError: (err, index) ->
-    message = err.message
-    stack = err.stack
-    messageIndex = stack.indexOf(message) + message.length
-    message = stack.slice 0, messageIndex
-    stack = (stack.slice messageIndex + 3, stack.length).replace /^/gm, '  '
-    @log color 'fail', "#{index}) #{message}"
+  showError: (err, test, index) ->
+    titleStack = do lifo
+    while test?
+      titleStack.push test.title if test.title.length
+      test = test.parent
+
+    @log "#{index + 1}) #{do titleStack.pop}"
+    spacing = 3
+    until do titleStack.isEmpty
+      title = do titleStack.pop
+      @log "#{getSpacing spacing++, 2}#{title}"
+
+    @indentation = 0
+    @log ''
+
+    {message, stack} = processError err
+    @log color 'fail', "  #{message}"
+    @log ''
     @log color 'fail', "#{stack}"
 
 module.exports = new Logger

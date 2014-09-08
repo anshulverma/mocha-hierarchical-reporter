@@ -8,13 +8,23 @@ expectation =
   suite two
      - test3
      suite three
-         - test4
-     * test5 (2)
+         * test4 (2)
+     - test5
   #
-  1) Error: forced to fail
+  #
+  1) suite one
+       test1
+  #
+    Error: forced to fail
+  #
 STACKTRACE
   #
-  2) Error: this is a test
+  2) suite two
+       suite three
+         test4
+  #
+    Error: this is a test
+  #
 STACKTRACE
   #
   3 passing (NNNms)
@@ -32,7 +42,24 @@ describe 'multiple passing and failing', ->
     mockSuite2 = title: 'suite two'
     mockSuite3 = title: 'suite three'
 
+    mockTest1.parent = mockSuite1
+    mockTest2.parent = mockSuite1
+    mockTest3.parent = mockSuite2
+    mockTest4.parent = mockSuite3
+    mockTest5.parent = mockSuite2
+
+    mockSuite3.parent = mockSuite2
+
+    mockMasterSuite =
+      title: ''
+      suites: [
+        mockSuite1
+        mockSuite2
+        mockSuite3
+      ]
+
     runner.emit 'start'
+    runner.emit 'suite', mockMasterSuite
     runner.emit 'suite', mockSuite1
     runner.emit 'fail', mockTest1, new Error 'forced to fail'
     runner.emit 'pass', mockTest2
@@ -40,9 +67,10 @@ describe 'multiple passing and failing', ->
     runner.emit 'suite', mockSuite2
     runner.emit 'pass', mockTest3
     runner.emit 'suite', mockSuite3
-    runner.emit 'pass', mockTest4
+    runner.emit 'fail', mockTest4, new Error 'this is a test'
     runner.emit 'suite end'
-    runner.emit 'fail', mockTest5, new Error 'this is a test'
+    runner.emit 'pass', mockTest5
+    runner.emit 'suite end'
     runner.emit 'suite end'
     runner.emit 'end'
 

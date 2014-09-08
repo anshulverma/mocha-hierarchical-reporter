@@ -12,8 +12,9 @@ module.exports = (runner) ->
     stats.start = new Date
 
   runner.on 'suite', (suite) ->
-    logger.log suite.title
-    do logger.indent
+    if suite.title?.length
+      logger.log suite.title
+      do logger.indent
 
   runner.on 'suite end', ->
     do logger.unindent
@@ -26,12 +27,16 @@ module.exports = (runner) ->
   runner.on 'fail', (test, err) ->
     stats.failures++
     logger.fail "#{test.title} (#{stats.failures})"
-    errors.push err
+    errors.push
+      test  : test
+      err : err
 
   runner.on 'end', ->
-    logger.showError err, (index + 1) for err, index in errors
+    logger.showError error.err, error.test, index for error, index in errors
+
     duration = new Date - stats.start
     logger.log color 'pass', "#{stats.passes} passing (#{duration}ms)"
     logger.log color 'fail', "#{stats.failures} failing"
+
     stats.passes = stats.failures = 0
     errors = []
