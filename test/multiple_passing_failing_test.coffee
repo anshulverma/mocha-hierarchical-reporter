@@ -11,17 +11,20 @@ expectation =
          * test4 (2)
      - test5
   #
+  #
   1) suite one
        test1
   #
-     Error: forced to fail
+    Error: forced to fail
+  #
 STACKTRACE
   #
   2) suite two
        suite three
          test4
   #
-     Error: this is a test
+    Error: this is a test
+  #
 STACKTRACE
   #
   3 passing (NNNms)
@@ -47,7 +50,16 @@ describe 'multiple passing and failing', ->
 
     mockSuite3.parent = mockSuite2
 
+    mockMasterSuite =
+      title: ''
+      suites: [
+        mockSuite1
+        mockSuite2
+        mockSuite3
+      ]
+
     runner.emit 'start'
+    runner.emit 'suite', mockMasterSuite
     runner.emit 'suite', mockSuite1
     runner.emit 'fail', mockTest1, new Error 'forced to fail'
     runner.emit 'pass', mockTest2
@@ -58,6 +70,7 @@ describe 'multiple passing and failing', ->
     runner.emit 'fail', mockTest4, new Error 'this is a test'
     runner.emit 'suite end'
     runner.emit 'pass', mockTest5
+    runner.emit 'suite end'
     runner.emit 'suite end'
     runner.emit 'end'
 

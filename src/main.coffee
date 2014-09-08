@@ -12,8 +12,9 @@ module.exports = (runner) ->
     stats.start = new Date
 
   runner.on 'suite', (suite) ->
-    logger.log suite.title
-    do logger.indent
+    if suite.title?.length
+      logger.log suite.title
+      do logger.indent
 
   runner.on 'suite end', ->
     do logger.unindent

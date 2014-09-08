@@ -22,12 +22,12 @@ class Logger
     @indentation++
 
   unindent: ->
-    @indentation--
+    @indentation-- if @indentation > 0
 
   showError: (err, test, index) ->
     titleStack = do lifo
     while test?
-      titleStack.push test.title
+      titleStack.push test.title if test.title.length
       test = test.parent
 
     @log "#{index + 1}) #{do titleStack.pop}"
@@ -40,7 +40,8 @@ class Logger
     @log ''
 
     {message, stack} = processError err
-    @log color 'fail', "   #{message}"
+    @log color 'fail', "  #{message}"
+    @log ''
     @log color 'fail', "#{stack}"
 
 module.exports = new Logger
