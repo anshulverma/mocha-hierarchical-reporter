@@ -1,5 +1,4 @@
 global.assert  = require('chai').assert
-diff           = require 'diff'
 {EventEmitter} = require 'events'
 
 # We need to execute annotated source for coverage report generation. This can
@@ -50,13 +49,4 @@ processExpectation = (expectation) ->
 global.match = (actual, expected) ->
   expected = preProcessExpectation expected
   match = actual.match(processExpectation expected)
-  unless match?
-    diffParts = diff.diffChars actual, expected
-    diffParts.forEach (part) ->
-      type = 'log'
-      type = 'added' if part.added
-      type = 'removed' if part.removed
-      process.stderr.write util.color type, part.value, true
-    err = new Error 'output does not match (refer to diff above for details)'
-    err.stack = ''
-    throw err
+  assert.equal actual, expected unless match?

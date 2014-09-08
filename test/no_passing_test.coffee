@@ -4,7 +4,10 @@ expectation =
   suite one
      * test1 (1)
   #
-  1) Error: forced to fail
+  1) suite one
+       test1
+  #
+     Error: forced to fail
 STACKTRACE
   #
   0 passing (NNNms)
@@ -15,6 +18,8 @@ describe 'no passing reporter test', ->
   it 'no passing tests should be reported', ->
     mockTest = title: 'test1'
     mockSuite = title: 'suite one'
+
+    mockTest.parent = mockSuite
 
     runner.emit 'start'
     runner.emit 'suite', mockSuite
