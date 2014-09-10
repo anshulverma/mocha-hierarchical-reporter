@@ -1,6 +1,6 @@
 {
   "name": "hierarchical-reporter",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A test reporter for mocha which reports results in a hierarchy",
   "private": false,
   "author": "Anshul Verma <anshul.verma86@gmail.com>",
