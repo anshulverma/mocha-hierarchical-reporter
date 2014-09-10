@@ -34,7 +34,7 @@ provided by mocha. There are a few differences between this and `spec`:
 - A failing test has a `x` in front of it. The failing index suffix has
   been moved to the end of line.
 
-![Example report of failing tests](https://raw.githubusercontent.com/anshulverma/mocha-hierarchical-reporter/master/images/failing-tests.png "Report of failing tests")
+![Example report of failing tests](http://goo.gl/uqnA5L "Report of failing tests")
 
 - The failures are reported in the end as in `spec`. The only difference
   is the name of the failed tests is shown in a hierarchy.
